@@ -25,34 +25,67 @@ public class CreateObjects : MonoBehaviour
     /// </summary>
     public void OnPrimitiveTypeClick()
     {
-        GameObject newPrimitiveObject = null;
         GameObject button = EventSystem.current.currentSelectedGameObject;
+        CreatePrimitiveObject(button.name, "InHand", false, true);
+    }
+
+    /// <summary>
+    /// Creates new primitive object.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="tag"></param>
+    /// <param name="isSelected"></param>
+    /// <returns></returns>
+    public GameObject CreatePrimitiveObject(string type, string tag, bool isPlaced, bool isSelected)
+    {
+        GameObject newPrimitiveObject = null;
 
         // Creates new object.
-        switch (button.name)
+        switch (type)
         {
             case "Cube":
                 newPrimitiveObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                newPrimitiveObject.GetComponent<BoxCollider>().isTrigger = true;
                 break;
             case "Sphere":
                 newPrimitiveObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                newPrimitiveObject.GetComponent<SphereCollider>().isTrigger = true;
                 break;
             case "Capsule":
                 newPrimitiveObject = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                newPrimitiveObject.GetComponent<CapsuleCollider>().isTrigger = true;
                 break;
             case "Cylinder":
                 newPrimitiveObject = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                newPrimitiveObject.GetComponent<CapsuleCollider>().isTrigger = true;
                 break;
         }
 
-        // Adds scripts to new object and marks that object is selected.
+        // Adds components to new object and marks that object is selected.
         if (newPrimitiveObject != null)
         {
-            newPrimitiveObject.AddComponent<ObjectMovement>();
+            newPrimitiveObject.AddComponent<ObjectMovement>().isPlaced = isPlaced;
             newPrimitiveObject.AddComponent<ObjectColor>();
             newPrimitiveObject.AddComponent<DestroyObject>();
-            GameManager.Instance.isObjectSelected = true;
+
+            // Add rigidbody and set its values.
+            Rigidbody rigidbody = newPrimitiveObject.AddComponent<Rigidbody>();
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
+
+
+            newPrimitiveObject.tag = tag;
+
+            GameManager.Instance.isObjectSelected = isSelected;
+
+            if (!isPlaced)
+            {
+                DisableButtons();
+                newPrimitiveObject.GetComponent<ObjectColor>().ChoseColor();
+            }
         }
+
+        return newPrimitiveObject;
     }
 
     /// <summary>

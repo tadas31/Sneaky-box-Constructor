@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RGBA
   - ColorSlider
+  - Save
+  - InHand
   layers:
   - Default
   - TransparentFX

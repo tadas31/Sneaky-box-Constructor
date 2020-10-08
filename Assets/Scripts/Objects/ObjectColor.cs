@@ -25,7 +25,7 @@ public class ObjectColor : MonoBehaviour
         ColorPicker.Create(r.sharedMaterial.color, "Choose color!", SetColor, ColorFinished, true);
     }
 
-    private void SetColor(Color currentColor)
+    public void SetColor(Color currentColor)
     {
         r.sharedMaterial.color = currentColor;
     }

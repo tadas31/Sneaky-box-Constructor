@@ -16,16 +16,17 @@ public class ObjectMovement : MonoBehaviour
     }
     private bool _isPlaced;
 
+    // Speed at with object is rotated.
+    private float rotationSpeed;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _isPlaced = false;
+        rotationSpeed = 20f;
 
         // Gets game objects.
         spawnPosition = GameObject.Find("Main Camera/SpawnPosition").GetComponent<Transform>();
-        CreateObjects.Instance.DisableButtons();
-        GetComponent<ObjectColor>().ChoseColor();
     }
 
     // Update is called once per frame
@@ -36,14 +37,50 @@ public class ObjectMovement : MonoBehaviour
             // Moves object.
             transform.position = spawnPosition.position;
 
-            // Stops object movement.
-            if (Input.GetKeyUp(KeyCode.Space))
+            // Rotate object.
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                _isPlaced = true;
-                ColorPicker.Done();
-                CreateObjects.Instance.EnableButtons();
-                GameManager.Instance.isObjectSelected = false;
+                transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed);
             }
+
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Rotate(Vector3.left * Time.deltaTime * rotationSpeed);
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Rotate(Vector3.down * Time.deltaTime * rotationSpeed);
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+            }
+
+            // Reset rotation.
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// Checks if object is touching other objects.
+    /// Stops object movement when selected button is pressed.
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyUp(KeyCode.Space) && !_isPlaced)
+        {
+            _isPlaced = true;
+            ColorPicker.Done();
+            CreateObjects.Instance.EnableButtons();
+            GameManager.Instance.isObjectSelected = false;
+            gameObject.tag = "Save";
         }
     }
 }

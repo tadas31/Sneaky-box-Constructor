@@ -27,10 +27,13 @@ public class SelectObject : MonoBehaviour
                 // Selects object to move and change color.
                 objectHit.GetComponent<ObjectMovement>().isPlaced = false;
                 objectHit.GetComponent<ObjectColor>().ChoseColor();
+                objectHit.tag = "InHand";
 
                 // Disables buttons to create new objects and selection of objects.
                 CreateObjects.Instance.DisableButtons();
                 GameManager.Instance.isObjectSelected = true;
+
+
             }
         }
        
