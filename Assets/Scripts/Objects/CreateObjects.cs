@@ -8,16 +8,16 @@ public class CreateObjects : MonoBehaviour
 {
     public static CreateObjects Instance { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        Instance = this;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != null)
+        {
+            Destroy(this);
+        }
     }
 
     /// <summary>

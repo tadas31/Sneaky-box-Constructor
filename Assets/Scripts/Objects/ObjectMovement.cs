@@ -38,28 +38,28 @@ public class ObjectMovement : MonoBehaviour
             transform.position = spawnPosition.position;
 
             // Rotate object.
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (InputManager.Instance.GetKey("RotateObjectForward"))
             {
                 transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed);
             }
 
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (InputManager.Instance.GetKey("RotateObjectBack"))
             {
                 transform.Rotate(Vector3.left * Time.deltaTime * rotationSpeed);
             }
 
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (InputManager.Instance.GetKey("RotateObjectRight"))
             {
                 transform.Rotate(Vector3.down * Time.deltaTime * rotationSpeed);
             }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (InputManager.Instance.GetKey("RotateObjectLeft"))
             {
                 transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
             }
 
             // Reset rotation.
-            if (Input.GetKeyUp(KeyCode.R))
+            if (InputManager.Instance.KeyDown("ResetObjectRotation"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 0);
             }
@@ -74,7 +74,7 @@ public class ObjectMovement : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyUp(KeyCode.Space) && !_isPlaced)
+        if (InputManager.Instance.KeyUp("PlaceObject") && !_isPlaced)
         {
             _isPlaced = true;
             ColorPicker.Done();

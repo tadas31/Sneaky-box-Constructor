@@ -13,7 +13,7 @@ public class SelectObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0) && !GameManager.Instance.isObjectSelected)
+        if (InputManager.Instance.KeyUp("SelectObject") && !GameManager.Instance.isObjectSelected)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

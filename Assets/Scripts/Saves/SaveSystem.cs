@@ -14,10 +14,13 @@ public class SaveSystem
     /// Saves scene to file.
     /// </summary>
     /// <param name="objects"></param>
-    public static void SaveScene(List<SavableObject> objects)
+    /// <param name="selectedSave"></param>
+    public static void SaveScene(List<SavableObject> objects, int selectedSave)
     {
+        string saveFile = SavePath(selectedSave);
+
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(SAVE_ONE_PATH, FileMode.Create);
+        FileStream stream = new FileStream(saveFile, FileMode.Create);
 
         formatter.Serialize(stream, objects);
         stream.Close();
@@ -26,13 +29,16 @@ public class SaveSystem
     /// <summary>
     /// Loads scene from file.
     /// </summary>
+    /// <param name="selectedSave"></param>
     /// <returns></returns>
-    public static List<SavableObject> LoadScene()
+    public static List<SavableObject> LoadScene(int selectedSave)
     {
-        if (File.Exists(SAVE_ONE_PATH))
+        string saveFile = SavePath(selectedSave);
+
+        if (File.Exists(saveFile))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(SAVE_ONE_PATH, FileMode.Open);
+            FileStream stream = new FileStream(saveFile, FileMode.Open);
 
             List<SavableObject> objects = (List<SavableObject>)formatter.Deserialize(stream);
             stream.Close();
@@ -41,8 +47,30 @@ public class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + SAVE_ONE_PATH);
+            Debug.Log("Save file not found in " + saveFile);
             return null;
+        }
+    }
+
+    /// <summary>
+    /// Determines with save file to use.
+    /// </summary>
+    /// <param name="selectedSave"></param>
+    /// <returns></returns>
+    public static string SavePath(int selectedSave)
+    {
+        switch (selectedSave)
+        {
+            case 1:
+                return SAVE_ONE_PATH;
+            case 2:
+                return SAVE_TWO_PATH;
+            case 3:
+                return SAVE_THREE_PATH;
+            case 4:
+                return SAVE_FOUR_PATH;
+            default:
+                return SAVE_ONE_PATH;
         }
     }
 }

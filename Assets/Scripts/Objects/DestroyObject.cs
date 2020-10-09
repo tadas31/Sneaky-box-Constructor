@@ -13,7 +13,7 @@ public class DestroyObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GetComponent<ObjectMovement>().isPlaced && Input.GetKeyDown(KeyCode.Delete))
+        if (!GetComponent<ObjectMovement>().isPlaced && InputManager.Instance.KeyDown("DeleteObject"))
         {
             ColorPicker.Done();
             GameManager.Instance.isObjectSelected = false;

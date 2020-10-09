@@ -19,35 +19,35 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        var fastMode = InputManager.Instance.GetKey("Sprint");
         var movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
 
-        if (Input.GetKey(KeyCode.A))
+        if (InputManager.Instance.GetKey("MoveLeft"))
         {
             transform.position = transform.position + (-transform.right * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (InputManager.Instance.GetKey("MoveRight"))
         {
             transform.position = transform.position + (transform.right * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (InputManager.Instance.GetKey("MoveForward"))
         {
             transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (InputManager.Instance.GetKey("MoveBack"))
         {
             transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (InputManager.Instance.GetKey("MoveUp"))
         {
             transform.position = transform.position + (Vector3.up * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (InputManager.Instance.GetKey("MoveDown"))
         {
             transform.position = transform.position + (-Vector3.up * movementSpeed * Time.deltaTime);
         }
@@ -59,11 +59,11 @@ public class Movement : MonoBehaviour
             transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (InputManager.Instance.KeyDown("RotateCamera"))
         {
             StartLooking();
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        else if (InputManager.Instance.KeyUp("RotateCamera"))
         {
             StopLooking();
         }

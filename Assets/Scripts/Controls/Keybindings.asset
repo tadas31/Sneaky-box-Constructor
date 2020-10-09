@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809e2404b1ef9f04abec83344713a5fe, type: 3}
+  m_Name: Keybindings
+  m_EditorClassIdentifier: 
+  moveForward: 119
+  moveBack: 115
+  moveLeft: 97
+  moveRight: 100
+  moveUp: 113
+  moveDown: 101
+  sprint: 304
+  rotateCamera: 324
+  rotateObjectForward: 273
+  rotateObjectBack: 274
+  rotateObjectLeft: 276
+  rotateObjectRight: 275
+  placeObject: 32
+  selectObject: 323
+  deleteObject: 127
+  resetObjectRotation: 114
+  pause: 27
