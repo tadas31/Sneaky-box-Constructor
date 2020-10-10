@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
@@ -46,7 +45,7 @@ public class MenuButtons : MonoBehaviour
             SelectedSave.Instance.selectedSave = int.Parse(button.name);
         }
 
-        SceneManager.LoadScene("Game");
+        LevelLoader.Instance.LoadNexScene("Game");
     }
 
     public void OnDeleteSaveClick()

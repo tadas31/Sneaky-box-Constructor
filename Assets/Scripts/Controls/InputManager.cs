@@ -19,6 +19,8 @@ public class InputManager : MonoBehaviour
             Destroy(this);
         }
         DontDestroyOnLoad(this);
+
+        SaveSystem.LoadKeybindings();
     }
 
     public bool KeyDown(string key)

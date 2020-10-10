@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Pause menu elements.
     public GameObject pauseMenu;
     public GameObject confirmationWindow;
+    public GameObject settings;
 
 
     private void Awake()
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SaveGame();
-        SceneManager.LoadScene("Menu");
+        LevelLoader.Instance.LoadNexScene("Menu");
     }
 
     public void OnNoClick()
@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
 
     public void OnSettingsClick()
     {
-
+        settings.SetActive(true);
     }
 
 }

@@ -10,6 +10,8 @@ public class SaveSystem
     public static readonly string SAVE_THREE_PATH = Application.persistentDataPath + "/saveThree.save";
     public static readonly string SAVE_FOUR_PATH = Application.persistentDataPath + "/saveFour.save";
 
+    public static readonly string KEYBINDINGS_PATH = Application.persistentDataPath + "/keybindings.save";
+
     /// <summary>
     /// Saves scene to file.
     /// </summary>
@@ -71,6 +73,40 @@ public class SaveSystem
                 return SAVE_FOUR_PATH;
             default:
                 return SAVE_ONE_PATH;
+        }
+    }
+
+    /// <summary>
+    /// Saves keybindings to file.
+    /// </summary>
+    /// <param name="keybindings"></param>
+    public static void SaveKeybindings(Keybindings keybindings)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(KEYBINDINGS_PATH, FileMode.Create);
+
+        string json = JsonUtility.ToJson(keybindings);
+        formatter.Serialize(stream, json);
+        stream.Close();
+    }
+
+    /// <summary>
+    /// Loads keybindings form file.
+    /// </summary>
+    /// <returns></returns>
+    public static void LoadKeybindings()
+    {
+        if (File.Exists(KEYBINDINGS_PATH))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(KEYBINDINGS_PATH, FileMode.Open);
+
+            JsonUtility.FromJsonOverwrite((string)formatter.Deserialize(stream), InputManager.Instance.keybindings);
+            stream.Close();
+        }
+        else
+        {
+            Debug.Log("Save file not found in " + KEYBINDINGS_PATH);
         }
     }
 }

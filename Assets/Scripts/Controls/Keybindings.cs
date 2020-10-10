@@ -77,4 +77,67 @@ public class Keybindings : ScriptableObject
                 return KeyCode.None;
         }
     }
+
+    /// <summary>
+    /// Sets new key.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="newKey"></param>
+    public void ChangeKeybinding(string key, KeyCode newKey)
+    {
+        switch (key)
+        {
+            case "MoveForward":
+                moveForward = newKey;
+                break;
+            case "MoveBack":
+                moveBack = newKey;
+                break;
+            case "MoveLeft":
+                moveLeft = newKey;
+                break;
+            case "MoveRight":
+                moveRight = newKey;
+                break;
+            case "MoveUp":
+                moveUp = newKey;
+                break;
+            case "MoveDown":
+                moveDown = newKey;
+                break;
+            case "Sprint":
+                sprint = newKey;
+                break;
+            case "RotateCamera":
+                rotateCamera = newKey;
+                break;
+            case "RotateObjectForward":
+                rotateObjectForward = newKey;
+                break;
+            case "RotateObjectBack":
+                rotateObjectBack = newKey;
+                break;
+            case "RotateObjectLeft":
+                rotateObjectLeft = newKey;
+                break;
+            case "RotateObjectRight":
+                rotateObjectRight = newKey;
+                break;
+            case "PlaceObject":
+                placeObject = newKey;
+                break;
+            case "SelectObject":
+                selectObject = newKey;
+                break;
+            case "DeleteObject":
+                deleteObject = newKey;
+                break;
+            case "ResetObjectRotation":
+                resetObjectRotation = newKey;
+                break;
+            case "Pause":
+                pause = newKey;
+                break;
+        }
+    }
 }
